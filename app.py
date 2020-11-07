@@ -9,7 +9,19 @@ import logging
 from flask import Flask, request
 application = Flask(__name__)
 
-
+SIGNS = ["овен",
+	"телец",
+	"близнецы",
+	"рак",
+	"лев",
+	"дева",
+	"весы",
+	"скорпион",
+	"козерог",
+	"стрелец",
+	"водолей",
+	"рыбы",
+]
 
 app = Flask(__name__)
 app.debug = True
