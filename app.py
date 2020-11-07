@@ -44,41 +44,21 @@ def index():
 def marusya():
 	return "Marusya"
 
-@app.route("/sequence", methods=['POST'])
+@app.route("/marussia", methods=['POST'])
 def main():
 	logging.info("Request: %r", request.json)
 	card = {}
 	buttons = []
 
 	if request.json['session']['new']:
-		text = "Привет! Это навык AI Гороскоп. Какой у Вас знак зодиака?"
+		text = "Привет! Это навык Эй Ай Гороскоп. Какой у Вас знак зодиака?"
+		buttons = [{'title':"blue pill"}, {"title":"red pill"}]
+
 	elif request.json['request']['command'] == 'on_interrupt':
 		text = 'Пока!'
 
 	elif request.json['request']['command'] in SIGNS:
 		text = PREDICTIONS_DF.loc[0, request.json['request']['command']]
-
-	elif request.json['request']['command'] == 'картинка':
-		text = 'Картиночка'
-		card = {
-          "type":"BigImage",
-          "image_id":457239019,
-          # "title": "Заголовок для изображения",
-          # "description": "Описание изображения"
-		} 
-
-	elif request.json['request']['command'] == 'карусель':
-		text = 'Каруселечка'
-		card = {
-			"type": "ItemsList",
-			"items": [{"image_id":457239018}, {"image_id":457239019}, {"image_id":457239017}],
-			# "title": "Заголовок для изображения",
-			# "description": "Описание изображения"
-		} 
-
-	elif request.json['request']['command'] == 'кнопки':
-		text = 'Кнопочки'
-		buttons = [{'title':"blue pill"}, {"title":"red pill"}]
 
 	else:
 		text = request.json['request']['command']
