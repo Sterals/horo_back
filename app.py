@@ -1,20 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import logging
-
+import pandas as pd
 import json
 import logging
 
 # Импортируем подмодули Flask для запуска веб-сервиса.
 from flask import Flask, request
 application = Flask(__name__)
-
-app = Flask(__name__)
-app.debug = True
-logging.basicConfig(level=logging.DEBUG)
-
-sessionStorage = {}
-
 
 SIGNS = ["овен",
 	"телец",
@@ -30,9 +23,18 @@ SIGNS = ["овен",
 	"рыбы",
 ]
 
-# @app.route("/")
-# def hello():
-# 	return "Welcome to my page"
+PREDICTIONS_DF = pd.read_csv("horoscopes.csv", sep=";")
+
+app = Flask(__name__)
+app.debug = True
+
+logging.basicConfig(level=logging.DEBUG)
+
+sessionStorage = {}
+
+@app.route("/")
+def hello():
+	return "Welcome to my page"
 
 @app.route('/index')
 def index():
@@ -50,35 +52,33 @@ def main():
 
 	if request.json['session']['new']:
 		text = "Привет! Это навык AI Гороскоп. Какой у Вас знак зодиака?"
-		# buttons = [{x,y} for x,y in zip(12*["title"], SIGNS)]
-				   
 	elif request.json['request']['command'] == 'on_interrupt':
-		text = 'Приходи еще!'
+		text = 'Пока!'
 
 	elif request.json['request']['command'] in SIGNS:
-		text = 'Гороскоп!'
+		text = PREDICTIONS_DF.loc[0, request.json['request']['command']]
 
-	# elif request.json['request']['command'] == 'картинка':
-	# 	text = 'Картиночка'
-	# 	card = {
- #          "type":"BigImage",
- #          "image_id":457239019,
- #          # "title": "Заголовок для изображения",
- #          # "description": "Описание изображения"
-	# 	} 
+	elif request.json['request']['command'] == 'картинка':
+		text = 'Картиночка'
+		card = {
+          "type":"BigImage",
+          "image_id":457239019,
+          # "title": "Заголовок для изображения",
+          # "description": "Описание изображения"
+		} 
 
-	# elif request.json['request']['command'] == 'карусель':
-	# 	text = 'Каруселечка'
-	# 	card = {
-	# 		"type": "ItemsList",
-	# 		"items": [{"image_id":457239018}, {"image_id":457239019}, {"image_id":457239017}],
-	# 		# "title": "Заголовок для изображения",
-	# 		# "description": "Описание изображения"
-	# 	} 
+	elif request.json['request']['command'] == 'карусель':
+		text = 'Каруселечка'
+		card = {
+			"type": "ItemsList",
+			"items": [{"image_id":457239018}, {"image_id":457239019}, {"image_id":457239017}],
+			# "title": "Заголовок для изображения",
+			# "description": "Описание изображения"
+		} 
 
-	# elif request.json['request']['command'] == 'кнопки':
-	# 	text = 'Кнопочки'
-	# 	buttons = [{'title':"blue pill"}, {"title":"red pill"}]
+	elif request.json['request']['command'] == 'кнопки':
+		text = 'Кнопочки'
+		buttons = [{'title':"blue pill"}, {"title":"red pill"}]
 
 	else:
 		text = request.json['request']['command']
