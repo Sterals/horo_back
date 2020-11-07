@@ -52,13 +52,13 @@ def main():
 
 	if request.json['session']['new']:
 		text = "Привет! Это навык Эй Ай Гороскоп. Какой у Вас знак зодиака?"
-		buttons = [{x,y} for x,y in zip(2*["title"], ["Рыбы","Овен"])]
 
 	elif request.json['request']['command'] == 'on_interrupt':
 		text = 'Пока!'
 
 	elif request.json['request']['command'] in SIGNS:
-		text = PREDICTIONS_DF.loc[0, request.json['request']['command']]
+		text = "Гороскоп на сегодня. \n"+PREDICTIONS_DF.loc[0, request.json['request']['command']]
+		buttons = [{"title":"На завтра"}, {"title":"На другую дату"}]
 
 	else:
 		text = request.json['request']['command']
