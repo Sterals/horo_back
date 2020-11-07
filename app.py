@@ -31,7 +31,7 @@ SIGNS = ["овен",
 	"рыбы",
 ]
 
-HOROSCOPES = pd.read_csv("horoscopes.csv", sep=";")
+# HOROSCOPES = pd.read_csv("horoscopes.csv", sep=";")
 
 # @app.route("/")
 # def hello():
