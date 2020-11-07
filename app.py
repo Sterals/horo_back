@@ -41,11 +41,11 @@ HOROSCOPES = pd.read_csv("horoscopes.csv", sep=";")
 def index():
 	return'<h1>Heroku Deploy</h1>'
 
-@app.route("/marusya", methods=['POST', 'GET'])
-def marusya():
-	return "Marusya"
+# @app.route("/marusya", methods=['POST', 'GET'])
+# def marusya():
+# 	return "Marusya"
 
-@app.route("/", methods=['POST'])
+@app.route("/marusya", methods=['POST'])
 def main():
 	logging.info("Request: %r", request.json)
 	card = {}
