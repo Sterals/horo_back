@@ -57,11 +57,12 @@ def main():
 		text = 'Пока!'
 
 	elif request.json['request']['command'] in SIGNS:
-		text = "Гороскоп на сегодня. \n"+PREDICTIONS_DF.loc[0, request.json['request']['command']]
+		user_sign = request.json['request']['command']
+		text = "Гороскоп на сегодня. \n"+PREDICTIONS_DF.loc[0, user_sign]
 		buttons = [{"title":"На завтра"}, {"title":"На другую дату"}]
 
 	elif request.json['request']['command'] == 'на завтра':
-		text = "Гороскоп на завтра. \n"+PREDICTIONS_DF.loc[1, request.json['request']['command']]
+		text = "Гороскоп на завтра. \n"+PREDICTIONS_DF.loc[1, user_sign]
 		buttons = [{"title":"На сегодня"}, {"title":"На другую дату"}]
 
 	elif request.json['request']['command'] == 'на другую дату':
