@@ -60,6 +60,16 @@ def main():
 		text = "Гороскоп на сегодня. \n"+PREDICTIONS_DF.loc[0, request.json['request']['command']]
 		buttons = [{"title":"На завтра"}, {"title":"На другую дату"}]
 
+	elif request.json['request']['command'] == 'на завтра':
+		text = "Гороскоп на завтра. \n"+PREDICTIONS_DF.loc[1, request.json['request']['command']]
+		buttons = [{"title":"На сегодня"}, {"title":"На другую дату"}]
+
+	elif request.json['request']['command'] == 'на другую дату':
+		text = 'На какую дату?'
+
+	elif request.json['request']['command'] == 'on_interrupt':
+		text = 'Пока!'
+
 	else:
 		text = request.json['request']['command']
 	response = {
