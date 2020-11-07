@@ -49,12 +49,12 @@ def main():
 	buttons = []
 
 	if request.json['session']['new']:
-		text = "Привет!"
+		text = "Привет! Это навык AI Гороскоп. Какой у Вас знак зодиака?"
 	elif request.json['request']['command'] == 'on_interrupt':
 		text = 'Пока!'
 
-	elif request.json['request']['command'] == 'привет':
-		text = 'Привет!'
+	elif request.json['request']['command'] in SIGNS:
+		text = 'Гороскоп!'
 
 	elif request.json['request']['command'] == 'картинка':
 		text = 'Картиночка'
