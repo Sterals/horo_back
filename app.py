@@ -23,6 +23,8 @@ SIGNS = ["овен",
 	"рыбы",
 ]
 
+PREDICTIONS_DF = pd.read_csv("horoscopes.csv", sep=";")
+
 app = Flask(__name__)
 app.debug = True
 
@@ -54,7 +56,7 @@ def main():
 		text = 'Пока!'
 
 	elif request.json['request']['command'] in SIGNS:
-		text = 'Гороскоп!'
+		text = PREDICTIONS_DF.loc[0, request.json['request']['command']]
 
 	elif request.json['request']['command'] == 'картинка':
 		text = 'Картиночка'
