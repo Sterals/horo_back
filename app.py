@@ -53,7 +53,8 @@ def main():
 
 	if request.json['session']['new']:
 		text = "Привет! Это навык AI Гороскоп. Какой у Вас знак зодиака?"
-		buttons = [{x,y} for x,y in zip(12*["title"], SIGNS)]
+		buttons = [{x,y} for x,y in zip(2*["title"], ["blue pill", "red_pill"])]
+		# buttons = [{x,y} for x,y in zip(12*["title"], SIGNS)]
 				   
 	elif request.json['request']['command'] == 'on_interrupt':
 		text = 'Приходи еще!'
