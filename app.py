@@ -4,6 +4,7 @@ import logging
 
 import json
 import logging
+import pandas as pd
 
 # Импортируем подмодули Flask для запуска веб-сервиса.
 from flask import Flask, request
@@ -30,6 +31,8 @@ SIGNS = ["овен",
 	"рыбы",
 ]
 
+HOROSCOPES = pd.read_csv("horoscopes.csv", sep=";")
+
 # @app.route("/")
 # def hello():
 # 	return "Welcome to my page"
@@ -42,7 +45,7 @@ def index():
 def marusya():
 	return "Marusya"
 
-@app.route("/sequence", methods=['POST'])
+@app.route("/", methods=['POST'])
 def main():
 	logging.info("Request: %r", request.json)
 	card = {}
@@ -50,7 +53,7 @@ def main():
 
 	if request.json['session']['new']:
 		text = "Привет! Это навык AI Гороскоп. Какой у Вас знак зодиака?"
-		# buttons = [{x,y} for x,y in zip(12*["title"], SIGNS)]
+		buttons = [{x,y} for x,y in zip(12*["title"], SIGNS)]
 				   
 	elif request.json['request']['command'] == 'on_interrupt':
 		text = 'Приходи еще!'
