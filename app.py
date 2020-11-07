@@ -62,7 +62,7 @@ def main():
 		buttons = [{"title":"На завтра"}, {"title":"На другую дату"}]
 
 	elif request.json['request']['command'] == 'на завтра':
-		text = "Гороскоп на завтра. \n"+PREDICTIONS_DF.loc[1, user_sign]
+		text = "Гороскоп на завтра. \n"+PREDICTIONS_DF.loc[0, user_sign]
 		buttons = [{"title":"На сегодня"}, {"title":"На другую дату"}]
 
 	elif request.json['request']['command'] == 'на другую дату':
