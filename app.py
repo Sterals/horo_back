@@ -4,7 +4,7 @@ import logging
 import pandas as pd
 import json
 import logging
-
+from datetime import date
 # Импортируем подмодули Flask для запуска веб-сервиса.
 from flask import Flask, request
 application = Flask(__name__)
@@ -32,6 +32,9 @@ logging.basicConfig(level=logging.DEBUG)
 
 sessionStorage = {}
 
+def get_prediction(target_date, target_sign):
+	if target_date in PREDICTIONS_DF['date'].values
+
 @app.route("/")
 def hello():
 	return "Welcome to my page"
@@ -39,10 +42,8 @@ def hello():
 @app.route('/index')
 def index():
 	return'<h1>Heroku Deploy</h1>'
-
-@app.route("/marusya", methods=['POST', 'GET'])
-def marusya():
-	return "Marusya"
+	
+@app.route("/marussia", methods=['POST'])
 
 @app.route("/marussia", methods=['POST'])
 def main():
@@ -52,9 +53,6 @@ def main():
 
 	if request.json['session']['new']:
 		text = "Привет! Это навык Эй Ай Гороскоп. Какой у Вас знак зодиака?"
-
-	elif request.json['request']['command'] == 'on_interrupt':
-		text = 'Пока!'
 
 	elif request.json['request']['command'] in SIGNS:
 		user_sign = request.json['request']['command']
